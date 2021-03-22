@@ -703,6 +703,11 @@ static int fsl_sai_hw_params(struct snd_pcm_substream *substream,
 	regmap_write(sai->regmap, FSL_SAI_xMR(tx),
 		     ~0UL - ((1 << min(channels, slots)) - 1));
 
+	if (sai->soc_data->mclk_gated_by_bce)
+		/* Enable phyiscal MCLK pin signal early */
+		regmap_update_bits(sai->regmap, FSL_SAI_xCSR(tx, ofs),
+				   FSL_SAI_CSR_BCE, FSL_SAI_CSR_BCE);
+
 	return 0;
 }
 
@@ -1637,6 +1642,7 @@ static const struct fsl_sai_soc_data fsl_sai_imx8mp_data = {
 	.fifos = 8,
 	.flags = 0,
 	.max_register = FSL_SAI_MDIV,
+	.mclk_gated_by_bce = 1,
 };
 
 static const struct fsl_sai_soc_data fsl_sai_imx8ulp_data = {

@@ -236,6 +236,8 @@ struct fsl_sai_soc_data {
 	unsigned int flags;
 	unsigned int max_register;
 	unsigned int max_burst[2];
+	/* Set to 1 if the SAI gates MCLK to the output pin with BCE */
+	bool mclk_gated_by_bce;
 };
 
 /**
