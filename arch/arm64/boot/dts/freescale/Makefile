@@ -85,6 +85,11 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mm-ddr4-evk.dtb imx8mm-ddr4-evk-rm67191.dtb imx8mm
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-icore-mx8mm-ctouch2.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-icore-mx8mm-edimm2.2.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-nitrogen-r2.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-verdin-nonwifi-dahlia.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-verdin-nonwifi-dev.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-verdin-wifi-dahlia.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mm-verdin-wifi-dev.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mn-beacon-kit.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mn-evk.dtb imx8mn-evk-rm67191.dtb imx8mn-evk-rpmsg.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mm-ab2.dtb imx8mm-ab2-m4.dtb imx8mm-ddr4-ab2.dtb imx8mm-ddr4-ab2-m4.dtb \
 			  imx8mm-ddr4-ab2-revb.dtb imx8mm-ddr4-ab2-m4-revb.dtb
