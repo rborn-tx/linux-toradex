@@ -121,6 +121,10 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
 			  imx8mp-evk-usdhc1-m2.dtb imx8mp-evk-rm67199.dtb \
 			  imx8mp-evk-dpdk.dtb imx8mp-evk-8mic-swpdm.dtb imx8mp-evk-rpmsg-lpv.dtb imx8mp-evk-revA3-8mic-revE.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-phyboard-pollux-rdk.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-verdin-nonwifi-dahlia.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-verdin-nonwifi-dev.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-verdin-wifi-dahlia.dtb
+dtb-$(CONFIG_ARCH_MXC) += imx8mp-verdin-wifi-dev.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mq-evk.dtb imx8mq-evk-rpmsg.dtb imx8mp-ab2.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-ddr4-evk.dtb
 dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk-ndm.dtb
