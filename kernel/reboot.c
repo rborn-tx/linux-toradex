@@ -463,6 +463,19 @@ int devm_register_sys_off_handler(struct device *dev,
 EXPORT_SYMBOL_GPL(devm_register_sys_off_handler);
 
 /**
+ *	do_kernel_power_off - Execute kernel power-off handler call chain
+ *
+ *	Expected to be called as last step of the power-off sequence.
+ *
+ *	Powers off the system immediately if a power-off handler function has
+ *	been registered. Otherwise does nothing.
+ */
+void do_kernel_power_off(void)
+{
+	atomic_notifier_call_chain(&power_off_handler_list, 0, NULL);
+}
+
+/**
  *	kernel_power_off - power_off the system
  *
  *	Shutdown everything and perform a clean system power_off.
