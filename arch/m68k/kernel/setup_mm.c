@@ -92,7 +92,6 @@ unsigned int (*mach_get_ss)(void);
 EXPORT_SYMBOL(mach_get_ss);
 void (*mach_reset)( void );
 void (*mach_halt)( void );
-void (*mach_power_off)( void );
 #ifdef CONFIG_HEARTBEAT
 void (*mach_heartbeat) (int);
 EXPORT_SYMBOL(mach_heartbeat);
