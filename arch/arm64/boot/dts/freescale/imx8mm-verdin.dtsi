@@ -3,7 +3,6 @@
  * Copyright 2022 Toradex
  */
 
-#include "dt-bindings/phy/phy-imx8-pcie.h"
 #include "dt-bindings/pwm/pwm.h"
 #include "imx8mm.dtsi"
 
@@ -51,6 +50,12 @@
 			linux,code = <KEY_WAKEUP>;
 			wakeup-source;
 		};
+	};
+
+	pcie0_refclk: pcie0-refclk {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <100000000>;
 	};
 
 	/* Carrier Board Supplies */
@@ -614,13 +619,16 @@
 /* Verdin PCIE_1 */
 &pcie0 {
 	assigned-clocks = <&clk IMX8MM_CLK_PCIE1_AUX>,
+			  <&clk IMX8MM_CLK_PCIE1_PHY>,
 			  <&clk IMX8MM_CLK_PCIE1_CTRL>;
 	assigned-clock-parents = <&clk IMX8MM_SYS_PLL2_50M>,
+				 <&clk IMX8MM_SYS_PLL2_100M>,
 				 <&clk IMX8MM_SYS_PLL2_250M>;
-	assigned-clock-rates = <10000000>, <250000000>;
+	assigned-clock-rates = <10000000>, <100000000>, <250000000>;
 	clocks = <&clk IMX8MM_CLK_PCIE1_ROOT>, <&clk IMX8MM_CLK_PCIE1_AUX>,
-		 <&clk IMX8MM_CLK_PCIE1_PHY>;
-	clock-names = "pcie", "pcie_aux", "pcie_bus";
+		 <&clk IMX8MM_CLK_PCIE1_PHY>, <&pcie0_refclk>;
+	clock-names = "pcie", "pcie_aux", "pcie_phy", "pcie_bus";
+	ext_osc = <0>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pcie0>;
 	/* PCIE_1_RESET# (SODIMM 244) */
@@ -629,8 +637,6 @@
 
 &pcie_phy {
 	clocks = <&clk IMX8MM_CLK_PCIE1_PHY>;
-	fsl,clkreq-unsupported;
-	fsl,refclk-pad-mode = <IMX8_PCIE_REFCLK_PAD_OUTPUT>;
 	fsl,tx-deemph-gen1 = <0x2d>;
 	fsl,tx-deemph-gen2 = <0xf>;
 };
