@@ -162,6 +162,12 @@
 /delete-node/ &dsp_vdev0vring1;
 /delete-node/ &dsp_vdev0buffer;
 
+/* only used for tuning tool, whatever that is, save the 256MB, commit de8502de1df8f */
+/delete-node/ &isp0_reserved;
+&isp_0 {
+	/delete-property/ memory-region;
+};
+
 /* Verdin SPI_1 */
 &ecspi1 {
 	#address-cells = <1>;
