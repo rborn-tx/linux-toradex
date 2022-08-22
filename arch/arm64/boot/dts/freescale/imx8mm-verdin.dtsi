@@ -629,6 +629,7 @@
 		 <&clk IMX8MM_CLK_PCIE1_PHY>, <&pcie0_refclk>;
 	clock-names = "pcie", "pcie_aux", "pcie_phy", "pcie_bus";
 	ext_osc = <0>;
+	l1ss-disabled;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pcie0>;
 	/* PCIE_1_RESET# (SODIMM 244) */
