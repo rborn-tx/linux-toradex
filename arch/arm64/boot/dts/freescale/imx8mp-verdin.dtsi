@@ -105,6 +105,7 @@
 	/* Carrier Board Supplies */
 	reg_1p8v: regulator-1p8v {
 		compatible = "regulator-fixed";
+		regulator-always-on;
 		regulator-max-microvolt = <1800000>;
 		regulator-min-microvolt = <1800000>;
 		regulator-name = "+V1.8_SW";
@@ -112,6 +113,7 @@
 
 	reg_3p3v: regulator-3p3v {
 		compatible = "regulator-fixed";
+		regulator-always-on;
 		regulator-max-microvolt = <3300000>;
 		regulator-min-microvolt = <3300000>;
 		regulator-name = "+V3.3_SW";
@@ -119,6 +121,7 @@
 
 	reg_5p0v: regulator-5p0v {
 		compatible = "regulator-fixed";
+		regulator-always-on;
 		regulator-max-microvolt = <5000000>;
 		regulator-min-microvolt = <5000000>;
 		regulator-name = "+V5_SW";
