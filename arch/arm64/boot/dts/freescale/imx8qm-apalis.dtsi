@@ -182,6 +182,12 @@
 			  "MXM3_291",
 			  "MXM3_289",
 			  "MXM3_287";
+
+	/* Enable pcie root / sata ref clock unconditionally */
+	pcie_sata_hog {
+		gpios = <27 GPIO_ACTIVE_HIGH>;
+	};
+
 };
 
 &lsio_gpio5 {
@@ -314,10 +320,6 @@
 &pinctrl_pcie_sata_refclk {
 	fsl,pins =
 		<IMX8QM_PCIE_CTRL0_CLKREQ_B_LSIO_GPIO4_IO27			0x00000021>;
-};
-
-&pcie_sata_refclk_gate {
-	enable-gpios = <&lsio_gpio4 27 GPIO_ACTIVE_HIGH>;
 };
 
 /* On-module Wi-Fi */

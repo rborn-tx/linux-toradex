@@ -43,28 +43,16 @@
 		};
 	};
 
-	pcie_sata_refclk: sata-clock-generator {
+	pcie_sata_refclk_gate: sata-ref-clock {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <100000000>;
 	};
 
-	pcie_sata_refclk_gate: sata-ref-clock {
-		compatible = "gpio-gate-clock";
-		#clock-cells = <0>;
-		clocks = <&pcie_sata_refclk>;
-		enable-gpios = <&lsio_gpio4 11 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_pcie_sata_refclk>;
-	};
-
 	pcie_wifi_refclk_gate: wifi-ref-clock {
-		compatible = "gpio-gate-clock";
+		compatible = "fixed-clock";
 		#clock-cells = <0>;
-		clocks = <&pcie_sata_refclk_gate>;
-		enable-gpios = <&lsio_gpio2 11 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_pcie_wifi_refclk>;
+		clock-frequency = <100000000>;
 	};
 
 	/*
@@ -620,6 +608,15 @@
 	 */
 	 pad-wakeup = <IMX8QM_SPI3_CS0 5 20>;
 	 pad-wakeup-num = <1>;
+
+	pcie_wifi_hog {
+		gpio-hog;
+		gpios = <11 GPIO_ACTIVE_HIGH>;
+		line-name = "PCIE_WIFI_CLK";
+		output-high;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_pcie_wifi_refclk>;
+	};
 };
 
 &lsio_gpio3 {
@@ -685,6 +682,16 @@
 			  "MXM3_291",
 			  "MXM3_289",
 			  "MXM3_287";
+
+	/* Enable pcie root / sata ref clock unconditionally */
+	pcie_sata_hog {
+		gpio-hog;
+		gpios = <11 GPIO_ACTIVE_HIGH>;
+		line-name = "PCIE_SATA_CLK";
+		output-high;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_pcie_sata_refclk>;
+	};
 };
 
 &lsio_gpio5 {
