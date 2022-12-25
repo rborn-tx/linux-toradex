@@ -158,17 +158,17 @@
 		#size-cells = <2>;
 		ranges;
 
-		decoder_boot: decoder_boot@0x84000000 {
+		decoder_boot: decoder_boot@84000000 {
 			no-map;
 			reg = <0 0x84000000 0 0x2000000>;
 		};
 
-		encoder1_boot: encoder1_boot@0x86000000 {
+		encoder1_boot: encoder1_boot@86000000 {
 			no-map;
 			reg = <0 0x86000000 0 0x200000>;
 		};
 
-		encoder2_boot: encoder2_boot@0x86200000 {
+		encoder2_boot: encoder2_boot@86200000 {
 			no-map;
 			reg = <0 0x86200000 0 0x200000>;
 		};
@@ -179,38 +179,38 @@
 		 * Shouldn't be used at A core and Linux side.
 		 *
 		 */
-		m4_reserved: m4@0x88000000 {
+		m4_reserved: m4@88000000 {
 			no-map;
 			reg = <0 0x88000000 0 0x8000000>;
 		};
 
-		rpmsg_reserved: rpmsg@0x90000000 {
+		rpmsg_reserved: rpmsg@90000000 {
 			no-map;
 			reg = <0 0x90200000 0 0x200000>;
 		};
 
-		vdevbuffer: vdevbuffer@0x90400000 {
+		vdevbuffer: vdevbuffer@90400000 {
 			compatible = "shared-dma-pool";
 			reg = <0 0x90400000 0 0x100000>;
 			no-map;
 		};
 
-		decoder_rpc: decoder_rpc@0x92000000 {
+		decoder_rpc: decoder_rpc@92000000 {
 			no-map;
 			reg = <0 0x92000000 0 0x200000>;
 		};
 
-		dsp_reserved: dsp@0x92400000 {
+		dsp_reserved: dsp@92400000 {
 			no-map;
 			reg = <0 0x92400000 0 0x2000000>;
 		};
 
-		encoder1_rpc: encoder1_rpc@0x94400000 {
+		encoder1_rpc: encoder1_rpc@94400000 {
 			no-map;
 			reg = <0 0x94400000 0 0x700000>;
 		};
 
-		encoder2_rpc: encoder2_rpc@0x94b00000 {
+		encoder2_rpc: encoder2_rpc@94b00000 {
 			no-map;
 			reg = <0 0x94b00000 0 0x700000>;
 		};
@@ -297,7 +297,7 @@
 	fsl,asrc-rate  = <48000>;
 };
 
-/* Apalis GLAN */
+/* Apalis ETH1 */
 &fec1 {
 	fsl,magic-packet;
 	fsl,mii-exclusive;
@@ -433,6 +433,7 @@
 	status = "okay";
 };
 
+/* Apalis LVDS1 */
 &ldb2_phy {
 	status = "disabled";
 };
@@ -839,12 +840,14 @@
 	status = "okay";
 };
 
+/* Apalis BKL1_PWM */
 &pwm_lvds1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm_bkl>;
 	#pwm-cells = <3>;
 };
 
+/* Apalis DAP1 */
 &sai1 {
 	assigned-clocks = <&clk IMX_SC_R_AUDIO_PLL_0 IMX_SC_PM_CLK_PLL>,
 			<&clk IMX_SC_R_AUDIO_PLL_0 IMX_SC_PM_CLK_SLV_BUS>,
@@ -1126,7 +1129,8 @@
 	/* On-module Gigabit Ethernet PHY Micrel KSZ9031 for Apalis GLAN */
 	pinctrl_fec1: fec1grp {
 		fsl,pins =
-			<IMX8QM_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB_PAD			0x000014a0>, /* Use pads in 3.3V mode */
+			/* Use pads in 3.3V mode */
+			<IMX8QM_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB_PAD			0x000014a0>,
 			<IMX8QM_ENET0_MDC_CONN_ENET0_MDC				0x06000020>,
 			<IMX8QM_ENET0_MDIO_CONN_ENET0_MDIO				0x06000020>,
 			<IMX8QM_ENET0_RGMII_TX_CTL_CONN_ENET0_RGMII_TX_CTL		0x06000020>,
@@ -1223,7 +1227,6 @@
 			<IMX8QM_FLEXCAN2_RX_DMA_FLEXCAN2_RX			0x00000021>;
 	};
 
-                             /* Apalis BKL_ON */
 	/* Apalis GPIO1 */
 	pinctrl_gpio1: gpio1grp {
 		fsl,pins =
@@ -1272,6 +1275,7 @@
 			<IMX8QM_MLB_DATA_LSIO_GPIO3_IO28			0x00000021>;
 	};
 
+	/* Apalis BKL1_ON */
 	pinctrl_gpio_bkl_on: gpiobklongrp {
 		fsl,pins =
 			<IMX8QM_LVDS0_GPIO00_LSIO_GPIO1_IO04			0x00000021>;

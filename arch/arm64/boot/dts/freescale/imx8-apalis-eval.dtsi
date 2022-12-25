@@ -3,8 +3,6 @@
  * Copyright 2019-2022 Toradex
  */
 
-#include <dt-bindings/pwm/pwm.h>
-
 / {
 	aliases {
 		rtc0 = &rtc_i2c;
@@ -168,14 +166,17 @@
 	status = "okay";
 };
 
+/* Apalis ETH1 */
 &fec1 {
 	status = "okay";
 };
 
+/* Apalis CAN1 */
 &flexcan1 {
 	status = "okay";
 };
 
+/* Apalis CAN2 */
 &flexcan2 {
 	status = "okay";
 };
@@ -192,14 +193,14 @@
 &i2c2 {
 	status = "okay";
 
-	atmel_mxt_ts: atmel_mxt_ts@4a {
+	atmel_mxt_ts: touch@4a {
 		compatible = "atmel,maxtouch";
 		interrupt-parent = <&lsio_gpio4>;
-		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;    /* Apalis GPIO5 */
+		interrupts = <1 IRQ_TYPE_EDGE_FALLING>;		/* Apalis GPIO5 */
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_gpio5>, <&pinctrl_gpio6>;
 		reg = <0x4a>;
-		reset-gpios = <&lsio_gpio4 2 GPIO_ACTIVE_HIGH>; /* Apalis GPIO6 */
+		reset-gpios = <&lsio_gpio4 2 GPIO_ACTIVE_LOW>;	/* Apalis GPIO6 */
 		status = "disabled";
 	};
 
@@ -282,12 +283,14 @@
 	status = "okay";
 };
 
+/* Apalis BKL1_PWM */
 &pwm_lvds1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_pwm_bkl>;
 	status = "okay";
 };
 
+/* Apalis DAP1 */
 &sai1 {
 	status = "okay";
 };

@@ -27,6 +27,20 @@
 	phy-mode = "rgmii-rxid";
 };
 
+/* Apalis HDMI1 */
+&hdmi {
+	ddc-i2c-bus = <&i2c0>;
+};
+
+/* Apalis I2C2 (DDC) */
+&i2c0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_lpi2c0>;
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <100000>;
+};
+
 &lsio_gpio0 {
 	gpio-line-names = "MXM3_279",
 			  "MXM3_277",
@@ -248,22 +262,10 @@
 			  "MXM3_243";
 };
 
-/* Apalis I2C2 (DDC) */
-&i2c0 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_lpi2c0>;
-	#address-cells = <1>;
-	#size-cells = <0>;
-	clock-frequency = <100000>;
-};
-
-&hdmi {
-	ddc-i2c-bus = <&i2c0>;
-};
-
 &pinctrl_fec1 {
 	fsl,pins =
-		<IMX8QM_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB_PAD			0x000014a0>, /* Use pads in 1.8V mode */
+		/* Use pads in 1.8V mode */
+		<IMX8QM_COMP_CTL_GPIO_1V8_3V3_ENET_ENETB_PAD			0x000014a0>,
 		<IMX8QM_ENET0_MDC_CONN_ENET0_MDC				0x06000020>,
 		<IMX8QM_ENET0_MDIO_CONN_ENET0_MDIO				0x06000020>,
 		<IMX8QM_ENET0_RGMII_TX_CTL_CONN_ENET0_RGMII_TX_CTL		0x06000020>,
