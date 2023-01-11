@@ -888,7 +888,7 @@
 	assigned-clocks = <&clk IMX_SC_R_AUDIO_PLL_0 IMX_SC_PM_CLK_PLL>,
 			  <&clk IMX_SC_R_AUDIO_PLL_0 IMX_SC_PM_CLK_SLV_BUS>,
 			  <&clk IMX_SC_R_AUDIO_PLL_0 IMX_SC_PM_CLK_MST_BUS>;
-	assigned-clock-rates = <786432000>, <49152000>, <24576000>;
+	assigned-clock-rates = <786432000>, <49152000>, <12288000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_spdif0>;
 	status = "okay";
