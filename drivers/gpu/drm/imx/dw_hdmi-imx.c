@@ -197,8 +197,8 @@ static bool imx8mp_hdmi_check_clk_rate(int rate_khz)
 
 	/* Check hdmi phy pixel clock support rate */
 	rate = clk_round_rate(imx8mp_clocks[0].clk, rate_khz * 1000);
-	/* Drop mode if pixelclk generated is more than 6% off */
-	if ((rate < rate_khz * 940) || (rate > rate_khz * 1060)) {
+	/* Drop mode if pixelclk generated is more than 10% off */
+	if ((rate < rate_khz * 900) || (rate > rate_khz * 1100)) {
 		pr_info("%s: mode with pixelclk %i kHz dropped\n",
 			__func__, rate_khz);
 		return  false;
