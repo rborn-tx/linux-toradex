@@ -231,9 +231,9 @@ check_pix_clk:
 	if (rounded_rate <= 0)
 		return MODE_BAD;
 
-	/* allow +/-0.5% HDMI pixel clock rate shift */
-	if (rounded_rate < pclk_rate * 995 / 1000 ||
-	    rounded_rate > pclk_rate * 1005 / 1000)
+	/* allow +/-10% pixel clock rate shift */
+	if (rounded_rate < pclk_rate * 900 / 1000 ||
+	    rounded_rate > pclk_rate * 1100 / 1000)
 		return MODE_BAD;
 
 	return MODE_OK;
