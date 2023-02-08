@@ -297,6 +297,30 @@
 	fsl,asrc-rate  = <48000>;
 };
 
+&cpu_alert0 {
+	temperature = <95000>;
+};
+
+&cpu_alert1 {
+	temperature = <95000>;
+};
+
+&cpu_crit0 {
+	temperature = <105000>;
+};
+
+&cpu_crit1 {
+	temperature = <105000>;
+};
+
+&drc_alert0 {
+	temperature = <95000>;
+};
+
+&drc_crit0 {
+	temperature = <105000>;
+};
+
 /* Apalis ETH1 */
 &fec1 {
 	fsl,magic-packet;
@@ -347,6 +371,22 @@
 	/* disable-fd-mode; */
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_flexcan3>;
+};
+
+&gpu_alert0 {
+	temperature = <95000>;
+};
+
+&gpu_alert1 {
+	temperature = <95000>;
+};
+
+&gpu_crit0 {
+	temperature = <105000>;
+};
+
+&gpu_crit1 {
+	temperature = <105000>;
 };
 
 /* Apalis HDMI1 */
