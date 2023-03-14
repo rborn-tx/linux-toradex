@@ -125,9 +125,64 @@
 	};
 };
 
-/* TODO i2c lvds0 accessible on FFC (X2) */
+/* MIPI DSI accessible on FFC (X2) */
+&i2c0_mipi_lvds0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c0_mipi_lvds0>;
+	clock-frequency = <100000>;
+	status = "disabled";
 
-/* TODO i2c lvds1 accessible on FFC (X3) */
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	/* DSI to HDMI Adapter V1.1A */
+	pca9540_switch: i2c-switch@70 {
+		compatible = "nxp,pca9540";
+		reg = <0x70>;
+		i2c-mux-idle-disconnect;
+		status = "disabled";
+
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		/* DDC/EDID */
+		i2c_sw0: i2c-sw@0 {
+			reg = <0>;
+		};
+
+		/* DSI-HDMI converter */
+		i2c-sw@1 {
+			reg = <1>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			lt8912_hdmi: dsihdmi@48 {
+				compatible = "lontium,lt8912";
+				reg = <0x48>;
+				pinctrl-names = "default";
+				pinctrl-0 = <&pinctrl_gpio_hpd>;
+				ddc-i2c-bus = <&i2c_sw0>;
+				hpd-gpios = <&lsio_gpio1 31 GPIO_ACTIVE_HIGH>;
+
+				port {
+					lt8912_in: endpoint {
+						remote-endpoint = <&mipi0_dsi_host_out>;
+					};
+				};
+			};
+		};
+	};
+};
+
+/* On-module MIPI CSI I2C accessible on FFC (X3) */
+&i2c0_mipi_lvds1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <100000>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c0_mipi_lvds1>;
+};
 
 /* Colibri I2C */
 &i2c1 {
@@ -373,7 +428,26 @@
 
 /* TODO MIPI CSI */
 
-/* TODO MIPI DSI with DSI-to-HDMI bridge lt8912 */
+&mipi0_dsi_host {
+	pwr-delay = <10>;
+
+	ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		port@1 {
+			reg = <1>;
+
+			mipi0_dsi_host_out: endpoint {
+				remote-endpoint = <&lt8912_in>;
+			};
+		};
+	};
+};
+
+&mipi1_dsi_host {
+	pwr-delay = <10>;
+};
 
 /* TODO on-module PCIe for Wi-Fi */
 
