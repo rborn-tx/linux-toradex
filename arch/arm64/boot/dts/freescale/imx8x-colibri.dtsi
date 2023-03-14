@@ -93,7 +93,9 @@
 
 /* TODO flexcan1 - 3 */
 
-/* TODO GPU */
+&gpu_3d0 {
+	status = "okay";
+};
 
 /* On-module I2C */
 &i2c0 {
@@ -134,6 +136,10 @@
 	clock-frequency = <100000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
+};
+
+&imx8_gpu_ss {
+	status = "okay";
 };
 
 &jpegdec {
