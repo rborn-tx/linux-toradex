@@ -111,6 +111,15 @@
 
 &lsio_gpio3 {
 	/*
+	 * Add GPIO3_10 as a wakeup source:
+	 * Pin:  157	SC_P_QSPI0A_DATA1 (SODIMM_45)
+	 * Type: 6	SC_PAD_WAKEUP_RISE_EDGE
+	 * Line: 10	GPIO3_IO10
+	 */
+	pad-wakeup = <IMX8QXP_QSPI0A_DATA1 6 10>;
+	pad-wakeup-num = <1>;
+
+	/*
 	 * This turns the LVDS transceiver on. If one wants to turn the
 	 * transceiver off, that property has to be deleted and the gpio handled
 	 * in userspace.
