@@ -247,8 +247,6 @@
 	remote-endpoint = <&lcd_display_in>;
 };
 
-/* TODO flexcan1 - 3 */
-
 &gpu_3d0 {
 	status = "okay";
 };
