@@ -413,7 +413,6 @@
 
 &dc0_prg2 {
 	status = "okay";
-
 };
 
 &dc0_prg3 {
@@ -471,6 +470,8 @@
 &dpu1 {
 	status = "okay";
 };
+
+/* TODO flexcan1 - 3 */
 
 &pwm_mipi_lvds0 {
 	pinctrl-names = "default";
