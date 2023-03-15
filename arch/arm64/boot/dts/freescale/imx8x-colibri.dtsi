@@ -365,6 +365,18 @@
 	clock-frequency = <100000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
+
+	/* Atmel maxtouch controller */
+	atmel_mxt_ts: touchscreen@4a {
+		compatible = "atmel,maxtouch";
+		reg = <0x4a>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_atmel_conn>;
+		interrupt-parent = <&lsio_gpio3>;
+		interrupts = <20 IRQ_TYPE_EDGE_FALLING>;		/* SODIMM 107 */
+		reset-gpios = <&lsio_gpio3 24 GPIO_ACTIVE_HIGH>;	/* SODIMM 106 */
+		status = "disabled";
+	};
 };
 
 &imx8_gpu_ss {
