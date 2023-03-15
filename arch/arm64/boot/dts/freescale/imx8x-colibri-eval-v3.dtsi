@@ -17,6 +17,24 @@
 		#clock-cells = <0>;
 		clock-frequency = <16000000>;
 	};
+
+	extcon_usbc_det: usbc_det {
+		compatible = "linux,extcon-usb-gpio";
+		id-gpio = <&lsio_gpio5 9 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_usbc_det>;
+	};
+
+	reg_usbh_vbus: regulator-usbh-vbus {
+		compatible = "regulator-fixed";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_usbh1_reg>;
+		gpio = <&lsio_gpio4 3 GPIO_ACTIVE_LOW>;
+		regulator-always-on;
+		regulator-max-microvolt = <5000000>;
+		regulator-min-microvolt = <5000000>;
+		regulator-name = "usbh_vbus";
+	};
 };
 
 /* Colibri Analogue Inputs */
@@ -86,6 +104,36 @@
 
 /* Colibri FastEthernet */
 &fec1 {
+	status = "okay";
+};
+
+/* USB PHY for &usbotg3 */
+&usb3_phy {
+	status = "okay";
+};
+
+&usbotg1 {
+	extcon = <&extcon_usbc_det &extcon_usbc_det>;
+	vbus-supply = <&reg_usbh_vbus>;
+	srp-disable;
+	hnp-disable;
+	adp-disable;
+	power-active-high;
+	disable-over-current;
+	status = "okay";
+};
+
+&usbotg3 {
+	status = "okay";
+};
+
+&usbotg3_cdns3 {
+	dr_mode = "host";
+	status = "okay";
+};
+
+/* USB PHY for &usbotg1 */
+&usbphy1 {
 	status = "okay";
 };
 

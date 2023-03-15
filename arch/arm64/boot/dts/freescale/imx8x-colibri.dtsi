@@ -557,10 +557,6 @@
 	no-1-8-v;
 };
 
-/* TODO USB Client/Host */
-
-/* TODO USB Host */
-
 /* TODO VPU Encoder/Decoder */
 
 &iomuxc {
