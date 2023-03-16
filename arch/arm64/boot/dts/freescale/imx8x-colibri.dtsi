@@ -293,6 +293,21 @@
 		VDDD-supply = <&reg_module_vref_1v8>;
 		VDDIO-supply = <&reg_module_3v3>;
 	};
+
+	gpio_expander_43: gpio@43 {
+		compatible = "fcs,fxl6408";
+		reg = <0x43>;
+		gpio-controller;
+		#gpio-cells = <2>;
+		gpio-line-names = "Wi-Fi_W_DISABLE",
+				  "Wi-Fi_WKUP_WLAN",
+				  "PWR_EN_+V3.3_WiFi_N",
+				  "PCIe_REF_CLK_EN",
+				  "USB_RESET_N",
+				  "USB_BYPASS_N",
+				  "Wi-Fi_PDn",
+				  "Wi-Fi_WKUP_BT";
+	};
 };
 
 /* MIPI DSI accessible on FFC (X2) */
