@@ -405,7 +405,7 @@
 		pinctrl-0 = <&pinctrl_atmel_conn>;
 		interrupt-parent = <&lsio_gpio3>;
 		interrupts = <20 IRQ_TYPE_EDGE_FALLING>;		/* SODIMM 107 */
-		reset-gpios = <&lsio_gpio3 24 GPIO_ACTIVE_HIGH>;	/* SODIMM 106 */
+		reset-gpios = <&lsio_gpio3 24 GPIO_ACTIVE_LOW>;		/* SODIMM 106 */
 		status = "disabled";
 	};
 };
