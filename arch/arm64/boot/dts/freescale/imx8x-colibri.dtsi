@@ -118,10 +118,6 @@
 			no-map;
 		};
 
-		gpu_reserved: gpu_reserved@880000000 {
-			no-map;
-			reg = <0x8 0x80000000 0 0x10000000>;
-		};
 	};
 
 	sound_card: sound-card {
