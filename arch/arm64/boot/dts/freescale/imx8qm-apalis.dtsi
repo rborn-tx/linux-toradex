@@ -11,8 +11,6 @@
 		     "fsl,imx8qm";
 };
 
-/delete-node/ &pcie_wifi_refclk_gate;
-
 &ethphy0 {
 	interrupts = <5 IRQ_TYPE_LEVEL_LOW>;
 };
@@ -332,12 +330,10 @@
 		 <&phyx2_crr0_lpcg 0>,
 		 <&pcieb_crr3_lpcg 0>,
 		 <&pciea_crr2_lpcg 0>,
-		 <&misc_crr5_lpcg 0>,
-		 <&pcie_sata_refclk_gate>;
+		 <&misc_crr5_lpcg 0>;
 	clock-names = "pcie", "pcie_bus", "pcie_inbound_axi",
 		      "pcie_phy", "pcie_phy_pclk", "phy_per",
-		      "pcie_per", "pciex2_per", "misc_per",
-		      "pcie_ext";
+		      "pcie_per", "pciex2_per", "misc_per";
 };
 
 /* Apalis MMC1 */
