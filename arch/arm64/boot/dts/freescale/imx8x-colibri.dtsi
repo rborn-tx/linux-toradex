@@ -72,6 +72,23 @@
 		status = "disabled";
 	};
 
+	hdmi_connector: hdmi-connector {
+		compatible = "hdmi-connector";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_hpd>;
+		ddc-i2c-bus = <&i2c_sw0>;
+		hpd-gpios = <&lsio_gpio1 31 GPIO_ACTIVE_HIGH>;
+		label = "hdmi";
+		type = "a";
+		status = "disabled";
+
+		port {
+			hdmi_connector_in: endpoint {
+				remote-endpoint = <&lt8912_out>;
+			};
+		};
+	};
+
 	reg_module_3v3: regulator-module-3v3 {
 		compatible = "regulator-fixed";
 		regulator-name = "+V3.3";
@@ -365,16 +382,28 @@
 			#size-cells = <0>;
 
 			lt8912_hdmi: dsihdmi@48 {
-				compatible = "lontium,lt8912";
+				compatible = "lontium,lt8912b";
 				reg = <0x48>;
-				pinctrl-names = "default";
-				pinctrl-0 = <&pinctrl_gpio_hpd>;
-				ddc-i2c-bus = <&i2c_sw0>;
-				hpd-gpios = <&lsio_gpio1 31 GPIO_ACTIVE_HIGH>;
 
-				port {
-					lt8912_in: endpoint {
-						remote-endpoint = <&mipi0_dsi_host_out>;
+				ports {
+					#address-cells = <1>;
+					#size-cells = <0>;
+
+					port@0 {
+						reg = <0>;
+
+						lt8912_in: endpoint {
+							data-lanes = <1 2 3 4>;
+							remote-endpoint = <&mipi0_dsi_host_out>;
+						};
+					};
+
+					port@1 {
+						reg = <1>;
+
+						lt8912_out: endpoint {
+							remote-endpoint = <&hdmi_connector_in>;
+						};
 					};
 				};
 			};
