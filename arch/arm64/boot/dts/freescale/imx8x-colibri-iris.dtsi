@@ -9,29 +9,11 @@
 		rtc1 = &rtc;
 	};
 
-	extcon_usbc_det: usbc_det {
-		compatible = "linux,extcon-usb-gpio";
-		id-gpio = <&lsio_gpio5 9 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_usbc_det>;
-	};
-
 	reg_3v3: regulator-3v3 {
 		compatible = "regulator-fixed";
 		regulator-max-microvolt = <3300000>;
 		regulator-min-microvolt = <3300000>;
 		regulator-name = "3.3V";
-	};
-
-	reg_usbh_vbus: regulator-usbh-vbus {
-		compatible = "regulator-fixed";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_usbh1_reg>;
-		regulator-name = "usbh_vbus";
-		regulator-min-microvolt = <5000000>;
-		regulator-max-microvolt = <5000000>;
-		gpio = <&lsio_gpio4 3 GPIO_ACTIVE_LOW>;
-		regulator-always-on;
 	};
 };
 
@@ -143,6 +125,10 @@
 
 /* Colibri PWM_D */
 &lsio_pwm2 {
+	status = "okay";
+};
+
+&reg_usbh_vbus {
 	status = "okay";
 };
 
