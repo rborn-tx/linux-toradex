@@ -1835,3 +1835,8 @@
 			<IMX8QM_MIPI_CSI0_GPIO0_01_LSIO_GPIO1_IO28		0x06000021>;
 	};
 };
+
+/* Delete peripherals which are not present on SOC, but are defined in imx8-ss-*.dtsi */
+
+/delete-node/ &adma_pwm;
+/delete-node/ &adma_pwm_lpcg;
