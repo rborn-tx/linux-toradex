@@ -320,22 +320,6 @@
 		<IMX8QM_PCIE_CTRL0_CLKREQ_B_LSIO_GPIO4_IO27			0x00000021>;
 };
 
-/* On-module Wi-Fi */
-&pcieb {
-	clocks = <&pcieb_lpcg 0>,
-		 <&pcieb_lpcg 1>,
-		 <&pcieb_lpcg 2>,
-		 <&phyx2_lpcg 1>,
-		 <&phyx2_lpcg 0>,
-		 <&phyx2_crr0_lpcg 0>,
-		 <&pcieb_crr3_lpcg 0>,
-		 <&pciea_crr2_lpcg 0>,
-		 <&misc_crr5_lpcg 0>;
-	clock-names = "pcie", "pcie_bus", "pcie_inbound_axi",
-		      "pcie_phy", "pcie_phy_pclk", "phy_per",
-		      "pcie_per", "pciex2_per", "misc_per";
-};
-
 /* Apalis MMC1 */
 &usdhc2 {
 	/*
