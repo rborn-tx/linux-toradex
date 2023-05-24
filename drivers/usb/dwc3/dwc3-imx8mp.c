@@ -55,6 +55,7 @@ struct dwc3_imx8mp {
 	void __iomem			*glue_base;
 	struct clk			*hsio_clk;
 	struct clk			*suspend_clk;
+	struct clk			*bus_early_clk;
 	int				irq;
 	bool				pm_suspended;
 	bool				wakeup_pending;
@@ -219,17 +220,31 @@ static int dwc3_imx8mp_probe(struct platform_device *pdev)
 	}
 
 	request_bus_freq(BUS_FREQ_HIGH);
+
+	dwc3_imx->bus_early_clk = devm_clk_get(dev, "bus_early_clk");
+	if (IS_ERR(dwc3_imx->bus_early_clk)) {
+		err = PTR_ERR(dwc3_imx->bus_early_clk);
+		dev_err(dev, "Failed to get bus_early_clk clk, err=%d\n", err);
+		goto rel_high_bus;
+	}
+
+	err = clk_prepare_enable(dwc3_imx->bus_early_clk);
+	if (err) {
+		dev_err(dev, "Failed to enable bus_early_clk clk, err=%d\n", err);
+		goto rel_high_bus;
+	}
+
 	dwc3_imx->hsio_clk = devm_clk_get(dev, "hsio");
 	if (IS_ERR(dwc3_imx->hsio_clk)) {
 		err = PTR_ERR(dwc3_imx->hsio_clk);
 		dev_err(dev, "Failed to get hsio clk, err=%d\n", err);
-		goto rel_high_bus;
+		goto disable_bus_early_clk_clk;
 	}
 
 	err = clk_prepare_enable(dwc3_imx->hsio_clk);
 	if (err) {
 		dev_err(dev, "Failed to enable hsio clk, err=%d\n", err);
-		return err;
+		goto disable_bus_early_clk_clk;
 	}
 
 	dwc3_imx->suspend_clk = devm_clk_get(dev, "suspend");
@@ -304,6 +319,8 @@ disable_clks:
 	clk_disable_unprepare(dwc3_imx->suspend_clk);
 disable_hsio_clk:
 	clk_disable_unprepare(dwc3_imx->hsio_clk);
+disable_bus_early_clk_clk:
+	clk_disable_unprepare(dwc3_imx->bus_early_clk);
 rel_high_bus:
 	release_bus_freq(BUS_FREQ_HIGH);
 
@@ -320,6 +337,7 @@ static int dwc3_imx8mp_remove(struct platform_device *pdev)
 
 	clk_disable_unprepare(dwc3_imx->suspend_clk);
 	clk_disable_unprepare(dwc3_imx->hsio_clk);
+	clk_disable_unprepare(dwc3_imx->bus_early_clk);
 	release_bus_freq(BUS_FREQ_HIGH);
 	pm_runtime_disable(dev);
 	pm_runtime_put_noidle(dev);
@@ -392,6 +410,7 @@ static int __maybe_unused dwc3_imx8mp_pm_suspend(struct device *dev)
 		clk_disable_unprepare(dwc3_imx->suspend_clk);
 
 	clk_disable_unprepare(dwc3_imx->hsio_clk);
+	clk_disable_unprepare(dwc3_imx->bus_early_clk);
 	dev_dbg(dev, "dwc3 imx8mp pm suspend.\n");
 
 	return ret;
@@ -401,6 +420,10 @@ static int __maybe_unused dwc3_imx8mp_pm_resume(struct device *dev)
 {
 	struct dwc3_imx8mp *dwc3_imx = dev_get_drvdata(dev);
 	int ret;
+
+	ret = clk_prepare_enable(dwc3_imx->bus_early_clk);
+	if (ret)
+		return ret;
 
 	if (device_may_wakeup(dwc3_imx->dev)) {
 		disable_irq_wake(dwc3_imx->irq);
