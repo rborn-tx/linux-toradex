@@ -221,7 +221,7 @@ static int dwc3_imx8mp_probe(struct platform_device *pdev)
 
 	request_bus_freq(BUS_FREQ_HIGH);
 
-	dwc3_imx->bus_early_clk = devm_clk_get(dev, "bus_early_clk");
+	dwc3_imx->bus_early_clk = devm_clk_get(dev, "bus_early");
 	if (IS_ERR(dwc3_imx->bus_early_clk)) {
 		err = PTR_ERR(dwc3_imx->bus_early_clk);
 		dev_err(dev, "Failed to get bus_early_clk clk, err=%d\n", err);
