@@ -671,6 +671,9 @@ static int lpi2c_imx_xfer(struct i2c_adapter *adapter,
 		/* quick smbus */
 		if (num == 1 && msgs[0].len == 0)
 			goto stop;
+			
+		lpi2c_imx->rx_buf = NULL;
+		lpi2c_imx->tx_buf = NULL;
 
 		if (is_use_dma(lpi2c_imx, &msgs[i])) {
 			lpi2c_imx->using_dma = true;
