@@ -348,11 +348,13 @@ void __blk_queue_split(struct bio **bio, unsigned int *nr_segs)
 			break;
 		}
 		split = blk_bio_segment_split(q, *bio, &q->bio_split, nr_segs);
+		if (IS_ERR(split))
+			*bio = split = NULL;
 		break;
 	}
 
 	if (split) {
-		/* there isn't chance to merge the splitted bio */
+		/* there isn't chance to merge the split bio */
 		split->bi_opf |= REQ_NOMERGE;
 
 		bio_chain(split, *bio);
@@ -815,6 +817,8 @@ static struct request *attempt_merge(struct request_queue *q,
 
 	if (!blk_discard_mergable(req))
 		elv_merge_requests(q, req, next);
+
+	blk_crypto_rq_put_keyslot(next);
 
 	/*
 	 * 'next' is going away, so update stats accordingly

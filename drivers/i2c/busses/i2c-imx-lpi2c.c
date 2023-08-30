@@ -671,6 +671,9 @@ static int lpi2c_imx_xfer(struct i2c_adapter *adapter,
 		/* quick smbus */
 		if (num == 1 && msgs[0].len == 0)
 			goto stop;
+			
+		lpi2c_imx->rx_buf = NULL;
+		lpi2c_imx->tx_buf = NULL;
 
 		if (is_use_dma(lpi2c_imx, &msgs[i])) {
 			lpi2c_imx->using_dma = true;
@@ -759,10 +762,14 @@ disable:
 static irqreturn_t lpi2c_imx_isr(int irq, void *dev_id)
 {
 	struct lpi2c_imx_struct *lpi2c_imx = dev_id;
+	unsigned int enabled;
 	unsigned int temp;
+
+	enabled = readl(lpi2c_imx->base + LPI2C_MIER);
 
 	lpi2c_imx_intctrl(lpi2c_imx, 0);
 	temp = readl(lpi2c_imx->base + LPI2C_MSR);
+	temp &= enabled;
 
 	if (temp & MSR_NDF) {
 		lpi2c_imx->is_ndf = true;
