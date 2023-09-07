@@ -24,7 +24,7 @@
 			"Line", "Line In Jack";
 
 		codec_dai: simple-audio-card,codec {
-			clocks = <&audio_blk_ctrl IMX8MP_CLK_AUDIOMIX_SAI1_MCLK1>;
+			clocks = <&audio_blk_ctrl IMX8MP_CLK_AUDIO_BLK_CTRL_SAI1_MCLK1>;
 			sound-dai = <&wm8904_1a>;
 		};
 
@@ -100,7 +100,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_sai1>;
 		#sound-dai-cells = <0>;
-		clocks = <&audio_blk_ctrl IMX8MP_CLK_AUDIOMIX_SAI1_MCLK1>;
+		clocks = <&audio_blk_ctrl IMX8MP_CLK_AUDIO_BLK_CTRL_SAI1_MCLK1>;
 		clock-names = "mclk";
 		AVDD-supply = <&reg_1p8v>;
 		CPVDD-supply = <&reg_1p8v>;
