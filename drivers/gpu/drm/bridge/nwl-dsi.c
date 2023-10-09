@@ -434,6 +434,19 @@ static int nwl_dsi_config_dpi(struct nwl_dsi *dsi)
 		hbp = bytes * hback_porch - 10;
 		hsa = bytes * hsync_len - 10;
 		hsa = roundup(hsa, 2);
+	} else if (of_device_is_compatible(dsi->panel_bridge->of_node,
+					   "lontium,lt8912b")) {
+		int bytes = mipi_dsi_pixel_format_to_bpp(dsi->format) >> 3;
+
+		/*
+		 * Most likely we have the same issue with the LT8912B as
+		 * described above. However, magic timings are a bit different
+		 * compared to the displays.
+		 */
+		hfp = hfront_porch;
+		hbp = bytes * hback_porch;
+		hsa = bytes * hsync_len;
+		hsa = roundup(hsa, 2);
 	} else {
 		hfp = hfront_porch;
 		hbp = hback_porch;
