@@ -707,7 +707,6 @@ static long hantroenc_ioctl32(struct file *filp, unsigned int cmd, unsigned long
 		return err; \
 	force_uaccess_end(old_fs); \
 }
-#endif
 
 union {
 	unsigned long kux;
@@ -797,6 +796,7 @@ union {
 	}
 	return 0;
 }
+#endif
 
 /* VFS methods */
 static struct file_operations hantroenc_fops = {
