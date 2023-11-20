@@ -88,12 +88,9 @@
 		gpio = <&lsio_gpio1 28 GPIO_ACTIVE_HIGH>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_wifi_pdn>;
+		regulator-always-on;
 		regulator-name = "Wi-Fi_POWER_DOWN"; /* Wi-Fi module PDn */
 		startup-delay-us = <100>;
-
-		regulator-state-mem {
-			regulator-off-in-suspend;
-		};
 	};
 
 	reg_pcie_switch: regulator-pcie-switch {
