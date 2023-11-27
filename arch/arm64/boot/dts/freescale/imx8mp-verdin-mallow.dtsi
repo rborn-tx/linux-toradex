@@ -76,11 +76,6 @@
 	status = "okay";
 };
 
-/* EEPROM on display adapter boards */
-&eeprom_display_adapter {
-	status = "okay";
-};
-
 /* Verdin ETH_1 */
 &eqos {
 	status = "okay";
@@ -96,13 +91,9 @@
 	status = "okay";
 };
 
-/* Current measurement into module VCC */
-&hwmon {
-	status = "okay";
-};
-
 /* Temperature sensor on Mallow */
 &hwmon_temp {
+	compatible = "ti,tmp1075";
 	status = "okay";
 };
 
