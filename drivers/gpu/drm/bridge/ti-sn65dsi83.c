@@ -730,6 +730,8 @@ static int sn65dsi83_remove(struct i2c_client *client)
 {
 	struct sn65dsi83 *ctx = i2c_get_clientdata(client);
 
+	sn65dsi83_detach(&ctx->bridge);
+	sn65dsi83_atomic_disable(&ctx->bridge, NULL);
 	drm_bridge_remove(&ctx->bridge);
 	of_node_put(ctx->host_node);
 
