@@ -31,6 +31,10 @@
 	status = "okay";
 };
 
+&extcon_usbc_det {
+	status = "okay";
+};
+
 /* Colibri FastEthernet */
 &fec1 {
 	status = "okay";

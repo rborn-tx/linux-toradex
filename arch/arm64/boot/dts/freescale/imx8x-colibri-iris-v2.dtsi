@@ -19,6 +19,10 @@
 	};
 };
 
+&extcon_usbc_det {
+	status = "okay";
+};
+
 &iomuxc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_lvds_converter &pinctrl_gpio_iris>;
