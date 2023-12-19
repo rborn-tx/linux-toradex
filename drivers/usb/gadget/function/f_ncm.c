@@ -113,7 +113,7 @@ static inline unsigned ncm_bitrate(struct usb_gadget *g)
  * Smaller packets are not likely to be trying to maximize the
  * throughput and will be mstly sending smaller infrequent frames.
  */
-#define TX_MAX_NUM_DPE		32
+#define TX_MAX_NUM_DPE		4
 
 /* Delay for the transmit to wait before sending an unfilled NTB frame. */
 #define TX_TIMEOUT_NSECS	300000
