@@ -165,6 +165,7 @@ dtb-$(CONFIG_ARCH_MXC) += imx8qm-apalis-eval.dtb \
 			  imx8qm-apalis-v1.1-ixora-v1.1.dtb \
 			  imx8qm-apalis-v1.1-ixora-v1.2.dtb \
 			  imx8qp-apalis-v1.1-eval.dtb \
+			  imx8qp-apalis-v1.1-eval-v1.2.dtb \
 			  imx8qp-apalis-v1.1-ixora-v1.1.dtb \
 			  imx8qp-apalis-v1.1-ixora-v1.2.dtb \
 			  imx8qm-mek.dtb imx8qm-mek-ov5640.dtb \
