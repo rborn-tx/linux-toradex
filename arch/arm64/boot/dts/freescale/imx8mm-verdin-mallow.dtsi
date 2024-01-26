@@ -77,6 +77,11 @@
 	status = "okay";
 };
 
+&gpio5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ctrl_sleep_moci>;
+};
+
 /* Temperature sensor on Mallow */
 &hwmon_temp {
 	compatible = "ti,tmp1075";
