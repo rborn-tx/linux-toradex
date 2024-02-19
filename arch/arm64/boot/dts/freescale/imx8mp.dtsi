@@ -1968,6 +1968,7 @@
 				interrupts = <8 IRQ_TYPE_LEVEL_HIGH>;
 				interrupt-parent = <&irqsteer_hdmi>;
 				resets = <&hdmi_blk_ctrl IMX8MP_HDMI_BLK_CTRL_LCDIF_RESET>;
+				fsl,gpr = <&hdmi_blk_ctrl>;
 				power-domains = <&hdmimix_pd>;
 				status = "disabled";
 

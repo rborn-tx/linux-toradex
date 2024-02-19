@@ -285,7 +285,6 @@ static int imx8mp_hdmi_phy_init(struct dw_hdmi *dw_hdmi, void *data,
 static void imx8mp_hdmi_phy_disable(struct dw_hdmi *dw_hdmi, void *data)
 {
 	struct imx_hdmi *hdmi = (struct imx_hdmi *)data;
-	int val;
 
 	dev_dbg(hdmi->dev, "%s\n", __func__);
 	if (!hdmi->phy)
@@ -294,16 +293,6 @@ static void imx8mp_hdmi_phy_disable(struct dw_hdmi *dw_hdmi, void *data)
 	/* disable PVI */
 	imx8mp_hdmi_pvi_disable();
 	imx8mp_hdmi_pavi_powerdown();
-
-	/* TODO */
-	regmap_read(hdmi->regmap, 0x200, &val);
-	/* Disable CEC */
-	val &= ~0x2;
-	/* Power down HDMI PHY
-	 * TODO move PHY power off to hdmi phy driver
-	 * val |= 0x8;
-	 * regmap_write(hdmi->regmap, 0x200, val);
-	*/
 }
 
 static int imx8mp_hdmimix_setup(struct imx_hdmi *hdmi)
