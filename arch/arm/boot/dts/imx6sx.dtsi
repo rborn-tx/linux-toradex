@@ -940,7 +940,6 @@
 				reg = <0x020e4000 0x4000>;
 			};
 
-<<<<<<< HEAD
 			ldb: ldb@20e0014 {
 				#address-cells = <1>;
 				#size-cells = <0>;
